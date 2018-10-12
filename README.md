@@ -27,10 +27,13 @@ For example:
 ```python
 roledefs = {
     "web": {
-        "hosts": ["ec2-user@172.168.12.4", "centos@52.46.19.12:22"],
+        "hosts": ["qa-nginx-1", "prod-mongo-slave"],
         "nginx_config_file": "/etc/nginx/nginx.conf"
     }
 }
 ```
 
 Note that the role definitions are supposed to be provided by the user.
+
+## SSH
+All scripts assume that host information is present in the user's SSH configuration file, which is usually `~/.ssh/config`. For example, the `hosts` mentioned in `roledefs` above might have corresponding configurations providing information on IP, port and private key to SSH into the machine.
