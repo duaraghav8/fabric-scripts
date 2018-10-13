@@ -36,4 +36,11 @@ roledefs = {
 Note that the role definitions are supposed to be provided by the user.
 
 ## SSH
-All scripts assume that host information is present in the user's SSH configuration file, which is usually `~/.ssh/config`. For example, the `hosts` mentioned in `roledefs` above might have corresponding configurations providing information on IP, port and private key to SSH into the machine.
+All scripts assume that host information is present in the user's SSH configuration file, which is usually `~/.ssh/config`. For example, the `hosts` mentioned in `roledefs` above might have corresponding configurations providing information on IP, port and private key to SSH into the machine. Alternatively, this information can be provided to fabric while invoking it:
+
+```
+fab <TASK NAME> --hosts=centos@13.127.154.94 -i ~/.ssh/private-key.pem
+```
+
+## File upload
+The ideal way to upload files to a remote server through Fabric is to use the `put()` method provided by its API. However, this requires the target host to run a [SFTP](https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol) server which is not always desired by administrators. Hence, all tasks `echo` file content into the target hosts and do not require SFTP to be enabled.
